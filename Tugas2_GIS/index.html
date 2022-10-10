@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=1024, user-scalable=no">
+    <style>
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0;}
+      #map{ height: 100% }
+    </style>
+    <link rel="stylesheet" href="leaflet.css" />
+<!--[if lte IE 8]>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.6.4/leaflet.ie.css" />
+<![endif]-->
+
+<script src="leaflet-src.js"></script>
+<script type="text/javascript" src="leaflet.ajax.js"></script>
+<script src="leaflet.spin.js"></script>
+
+
+
+
+    <title>Tugas2</title>
+    </head>
+    <body>
+    <div id="map"></div>
+      <script type="text/javascript">
+
+    var m = L.map('map').setView([-8.618617562926488, 116.26754951175067], 14);
+    var mopt = {
+        url:  'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+        options: { attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>' }
+    };
+    var mq = L.tileLayer(mopt.url, mopt.options);
+    mq.addTo(m);
+
+function popUp(f,l){
+    var out = [];
+    if (f.properties){
+        for(key in f.properties){
+            out.push(key+": "+f.properties[key]);
+        }
+        l.bindPopup(out.join("<br />"));
+    }
+}
+var jsonTest = new L.GeoJSON.AJAX(["TI.goejson"],{onEachFeature:popUp}).addTo(m);
+
+    var marker = L.marker([-8.619073693021933, 116.26677703556534]).addTo(m)
+        .bindPopup('<b>Kantor Desa Taman Indah').openPopup();
+       
+    var marker = L.marker([-8.611972122524213, 116.26551639753269]).addTo(m)
+        .bindPopup('<b>Masjid  Nurul Huda Banteng Keselet').openPopup();
+    /*var marker = L.marker([-8.612284723010417, 116.26398753841295).addTo(m)
+        .bindPopup('<b>SMK Bangun Bangsa').openPopup(); */
+                
+
+   
+</script>
+
+
+    </body>
+</html>
